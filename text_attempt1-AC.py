@@ -12,15 +12,11 @@ post = [' ' for x in range(0,1077)]
 trying = [ ' ' for x in range(0,50)]
 num_articles = 0
 
-<<<<<<< HEAD
-
-=======
 # READ IN ARTICLES FROM WORDPRESS XML FILE
 
 # Insert each article into one instance of the post array
 # There is one extra instance of the post array - otherwise I could not get it to read
     # the last article (not sure why - can edit / try to fix later)
->>>>>>> 3271ff6a14ef54e154a17305892b5ad767ef8cec
 f = open("oncenturyavenue.wordpress.2018-03-31.xml", "r")
 for i in range(0,37):
     line =f.readline()
@@ -46,7 +42,6 @@ import re
 # create array to store metadata (author_id, pubDate) in
 w,h = 2,1077;
 meta = [['' for x in range(w)] for y in range(h)]
-print(meta[2][1])
 
 #iterating through each post
 for i in range(0,1076):
@@ -64,7 +59,6 @@ for i in range(0,1076):
     for encoded_content in soup.findAll("encoded"):
         for child in encoded_content.children:
             hold[j] = child
-            print(child)
             j += 1
     post[i] = hold[0]
     
@@ -77,8 +71,6 @@ for i in range(0,1076):
     
     hold = post[i]
     post[i] = ''
-    print(hold)
-    print(start)
     # this was to account for the fact that some articles did not have any < >
     # this difference is attributable to different ways articles were entered in
     if start == []:
@@ -92,11 +84,9 @@ for i in range(0,1076):
     else:
         # has < >, but don't iterate through, just use get_text, because the text is in
             # brackets
-        print('yikes')
         hold = BeautifulSoup(hold, "lxml")
         post[i] = hold.get_text()
-<<<<<<< HEAD
-print(post[-1])
+
 #g = open("ocatextposts.txt", "w")
 #for i in range(0,len(post)):
 #    g.write(str(i))
@@ -107,21 +97,21 @@ print(post[-1])
 
 articlesPickle = open('articlesPickle','wb')
 pickle.dump(post,articlesPickle)
-=======
+
 
 # WRITE THE CLEANED ARTICLES TO .TXT FILE
-g = open("ocatextposts.txt", "w")
-for i in range(0,len(post)):
-    g.write(str(i))
-    g.write('\n')
-    g.write(post[i])
-    g.write('\n')
-g.close()
->>>>>>> 3271ff6a14ef54e154a17305892b5ad767ef8cec
+#g = open("ocatextposts.txt", "w")
+#for i in range(0,len(post)):
+#    g.write(str(i))
+#    g.write('\n')
+#    g.write(post[i])
+#    g.write('\n')
+#g.close()
 
 # PRINT OUT THE 2= DIM META DATA ARRAY
-print(meta)
-
+#print(meta)
+metaPickle = open('metaPickle','wb')
+pickle.dump(meta,metaPickle)
 
 ### Create dictionary with key as author_id and name as value
 f = open("oncenturyavenue.wordpress.2018-03-31.xml", "r")
@@ -138,3 +128,6 @@ for i in range(len(author_id)):
     authors_dict[author_id[i]] = author_name[i]
 print(authors_dict)
 f.close()
+
+authorsPickle = open('authorsPickle','wb')
+pickle.dump(authors_dict, authorsPickle)
