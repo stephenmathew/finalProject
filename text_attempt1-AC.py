@@ -1,5 +1,7 @@
 ### Reading in data from OCA text file
 
+import pickle
+
 ###Reading in authors
 authors = [ ' ' for x in range (0,242)]
 author_id = [ ' ' for x in range(0,242)]
@@ -7,6 +9,7 @@ author_name = [ ' ' for x in range(0,242)]
 post = [' ' for x in range(0,1079)]
 trying = [ ' ' for x in range(0,50)]
 num_articles = 0
+
 
 f = open("oncenturyavenue.wordpress.2018-03-31.xml", "r")
 for i in range(0,37):
@@ -68,13 +71,16 @@ for i in range(0,len(post)):
         hold = BeautifulSoup(hold, "lxml")
         post[i] = hold.get_text()
 print(post[-1])
-g = open("ocatextposts.txt", "w")
-for i in range(0,len(post)):
-    g.write(str(i))
-    g.write('\n')
-    g.write(post[i])
-    g.write('\n')
-g.close()
+#g = open("ocatextposts.txt", "w")
+#for i in range(0,len(post)):
+#    g.write(str(i))
+#    g.write('\n')
+#    g.write(post[i])
+#    g.write('\n')
+#g.close()
+
+articlesPickle = open('articlesPickle','wb')
+pickle.dump(post,articlesPickle)
 
 ### Create dictionary with key as author_id and name as value
 f = open("oncenturyavenue.wordpress.2018-03-31.xml", "r")
