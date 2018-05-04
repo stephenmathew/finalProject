@@ -49,15 +49,9 @@ def getWeightDirectionWordArrays():
             wordTuple[index] = removeUnderscore(wordTuple[index])
        
         wordsArray.append(wordTuple)
+
+getWeightDirectionWordArrays()
     
 weightsFile.close()
-print(wordsArray[179])
+#print(wordsArray[179])
 
-#def removeUnderscore(word):
-#    wordSplit = word.split('_')
-#    outStr = ''
-#    for element in wordSplit:
-#        addition = str(element) + '\s'
-#        outStr += addition
-#    return(outStr)
-#print(removeUnderscore('bring_home_the_bacon'))
