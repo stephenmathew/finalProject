@@ -6,7 +6,7 @@ Created on Mon Apr 30 14:33:48 2018
 @author: stephenmathew
 """
 import pickle
-#import numpy as np
+
 
 articlesPickleFile = open('articlesPickle','rb')
 weightsFile = open('EffectWordNet.txt','r')
@@ -19,6 +19,7 @@ numArticles = len(articlesArray)
 weightsArray = []
 directionArray = []
 wordsArray = []
+wordsDict = {}
 
 
 def removeUnderscore(word):
@@ -30,11 +31,12 @@ def removeUnderscore(word):
     return(outStr)
 
 def getWeightDirectionWordArrays():
+    termsInDict = 0
     for line in weightsFile:
         lineArray = line.split('\t')
         
         weight = lineArray[0]
-        weightsArray.append(weight)
+        weightsArray.append(int(weight))
         
         direction = lineArray[1]
         directionArray.append(direction)
@@ -47,11 +49,52 @@ def getWeightDirectionWordArrays():
    
         for index in range(len(wordTuple)):
             wordTuple[index] = removeUnderscore(wordTuple[index])
+            currentWord = wordTuple[index]
+            currentWord.rstrip()
+            wordsDict[currentWord] = termsInDict
        
         wordsArray.append(wordTuple)
+        termsInDict+=1
 
 getWeightDirectionWordArrays()
     
 weightsFile.close()
-#print(wordsArray[179])
+print(wordsArray[179])
+
+
+def readZePosts():
+    postScores = []
+
+    for post in articlesArray:
+
+        postScore = 0
+        postWords = post.split(' ')
+        for searchWord in postWords:
+
+            if (searchWord == ' '):
+                continue
+            search = searchWord + ' '
+            wordScore = 0
+            try:
+                wordIndex = wordsDict[search]
+                if (directionArray[wordIndex] =='+Effect'):
+                    wordScore += 1
+                elif(directionArray[wordIndex] =='-Effect'):
+                    wordScore -= 1
+                weight = (weightsArray[wordIndex])
+                wordScore = wordScore * weight
+            except :
+                continue
+            postScore += wordScore
+        postScores.append(postScore)
+    return(postScores)
+    
+postScoresArray = readZePosts()
+
+    
+    
+    
+        
+    
+    
 
