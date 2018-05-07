@@ -60,6 +60,7 @@ getWeightDirectionWordArrays()
     
 weightsFile.close()
 print(wordsArray[179])
+<<<<<<< Updated upstream
 
 
 def readZePosts():
@@ -97,4 +98,6 @@ postScoresArray = readZePosts()
         
     
     
+=======
+>>>>>>> Stashed changes
 
