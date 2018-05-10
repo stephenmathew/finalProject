@@ -20,6 +20,7 @@ weightsArray = []
 directionArray = []
 wordsArray = []
 wordsDict = {}
+postWordList = []
 
 
 def removeUnderscore(word):
@@ -60,44 +61,96 @@ getWeightDirectionWordArrays()
     
 weightsFile.close()
 print(wordsArray[179])
-<<<<<<< Updated upstream
+
 
 
 def readZePosts():
     postScores = []
 
     for post in articlesArray:
-
+        postWordList = []
         postScore = 0
         postWords = post.split(' ')
+        count = 0
         for searchWord in postWords:
-
+            count+=1
             if (searchWord == ' '):
                 continue
             search = searchWord + ' '
             wordScore = 0
+            wordScoreTemp = 0
             try:
                 wordIndex = wordsDict[search]
+                postWordList.append(search)
                 if (directionArray[wordIndex] =='+Effect'):
-                    wordScore += 1
+                    wordScoreTemp += 1
                 elif(directionArray[wordIndex] =='-Effect'):
-                    wordScore -= 1
+                    wordScoreTemp -= 1
+                #negation detection
+                for neg in range(count-5, count):
+                    if postWords[neg]=='not':
+                        wordScore = wordScore*-1
+                    elif postWords[neg]=='never':
+                        wordScore = wordScore*-1
+                #intensifer
+                for intense in range(count-5, count):
+                    if postWords[intense]=='very':
+                        if wordScoreTemp == -1:
+                            wordScore -=1
+                        else:
+                            wordScore +=1
+                    elif postWords[intense]=='extremely':
+                        if wordScoreTemp == -1:
+                            wordScore -=1
+                        else:
+                            wordScore +=1
+                    elif postWords[intense]=='incredibly':
+                        if wordScoreTemp == -1:
+                            wordScore -=1
+                        else:
+                            wordScore +=1
+                    elif postWords[intense]=='particularly':
+                        if wordScoreTemp == -1:
+                            wordScore -=1
+                        else:
+                            wordScore +=1
+                #diminisher
+                for diminish in range(count-5,count):
+                    if postWords[diminish]=='little':
+                        if wordScoreTemp == -1:
+                            wordScore +=0.5
+                        else:
+                            wordScore -=0.5
+                    elif postWords[diminish]=='barely':
+                        if wordScoreTemp == -1:
+                            wordScore +=0.5
+                        else:
+                            wordScore -=0.5
+                    elif postWords[diminish]=='hardly':
+                        if wordScoreTemp == -1:
+                            wordScore +=0.5
+                        else:
+                            wordScore -=0.5
+                    elif postWords[diminish]=='rarely':
+                        if wordScoreTemp == -1:
+                            wordScore +=0.5
+                        else:
+                            wordScore -=0.5
                 weight = (weightsArray[wordIndex])
+                wordScore = wordScoreTemp
                 wordScore = wordScore * weight
             except :
                 continue
             postScore += wordScore
         postScores.append(postScore)
+        
     return(postScores)
+    
     
 postScoresArray = readZePosts()
 
     
     
-    
         
     
     
-=======
->>>>>>> Stashed changes
-
