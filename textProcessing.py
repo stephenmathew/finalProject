@@ -147,6 +147,7 @@ def readZePosts():
     return(postScores)
     
     
+    
 postScoresArray = readZePosts()
 
 sentimentPickle = open('sentimentPickle','wb')
