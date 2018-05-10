@@ -21,7 +21,7 @@ directionArray = []
 wordsArray = []
 wordsDict = {}
 postWordList = []
-
+articlesArray = articlesArray[:-1]
 
 def removeUnderscore(word):
     wordSplit = word.split('_')
@@ -96,46 +96,46 @@ def readZePosts():
                 for intense in range(count-5, count):
                     if postWords[intense]=='very':
                         if wordScoreTemp == -1:
-                            wordScore -=1
+                            wordScoreTemp -=1
                         else:
                             wordScore +=1
                     elif postWords[intense]=='extremely':
                         if wordScoreTemp == -1:
-                            wordScore -=1
+                            wordScoreTemp -=1
                         else:
                             wordScore +=1
                     elif postWords[intense]=='incredibly':
                         if wordScoreTemp == -1:
-                            wordScore -=1
+                            wordScoreTemp -=1
                         else:
                             wordScore +=1
                     elif postWords[intense]=='particularly':
                         if wordScoreTemp == -1:
-                            wordScore -=1
+                            wordScoreTemp -=1
                         else:
-                            wordScore +=1
+                            wordScoreTemp +=1
                 #diminisher
                 for diminish in range(count-5,count):
                     if postWords[diminish]=='little':
                         if wordScoreTemp == -1:
-                            wordScore +=0.5
+                            wordScoreTemp +=0.5
                         else:
-                            wordScore -=0.5
+                            wordScoreTemp -=0.5
                     elif postWords[diminish]=='barely':
                         if wordScoreTemp == -1:
-                            wordScore +=0.5
+                            wordScoreTemp +=0.5
                         else:
-                            wordScore -=0.5
+                            wordScoreTemp -=0.5
                     elif postWords[diminish]=='hardly':
                         if wordScoreTemp == -1:
-                            wordScore +=0.5
+                            wordScoreTemp +=0.5
                         else:
-                            wordScore -=0.5
+                            wordScoreTemp -=0.5
                     elif postWords[diminish]=='rarely':
                         if wordScoreTemp == -1:
-                            wordScore +=0.5
+                            wordScoreTemp +=0.5
                         else:
-                            wordScore -=0.5
+                            wordScoreTemp -=0.5
                 weight = (weightsArray[wordIndex])
                 wordScore = wordScoreTemp
                 wordScore = wordScore * weight
@@ -149,7 +149,8 @@ def readZePosts():
     
 postScoresArray = readZePosts()
 
-    
+sentimentPickle = open('sentimentPickle','wb')
+pickle.dump(postScoresArray, sentimentPickle)
     
         
     

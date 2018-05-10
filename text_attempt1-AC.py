@@ -40,7 +40,7 @@ from bs4 import  BeautifulSoup
 import re
 
 # create array to store metadata (author_id, pubDate) in
-w,h = 2,1077;
+w,h = 3,1077;
 meta = [['' for x in range(w)] for y in range(h)]
 
 #iterating through each post
@@ -51,6 +51,10 @@ for i in range(0,1076):
     
     meta[i][0] = soup.creator.get_text()
     meta[i][1] = soup.pubDate.get_text()
+    temp = meta[i][1]
+    meta[i][1] = temp[8:11]
+    meta[i][2] = temp[12:16]
+    print(meta[i])
     soup = BeautifulSoup(source_code, "xml")
     j = 0
     #separating out 'encoded content' so that only access text
