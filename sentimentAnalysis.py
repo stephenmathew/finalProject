@@ -20,19 +20,19 @@ articlesPickleFile.close()
 metaArray = metaArray[:-1]
 #print(sentimentArray)
 
-def selectionSort(l):
-    for value1 in range(len(l)):
-        for value2 in range(value1+1, len(l)):
-            if l[value2]<l[value1]:
-                l[value1],l[value2]=l[value2], l[value1]
-
-sentimentArray = list(map(float, sentimentArray))
-
-sentimentSort = sentimentArray
-selectionSort(sentimentSort)
-
-w,h = 3,1076;
-analysisArray = [[' ' for x in range(w)] for y in range(h)]
+#def selectionSort(l):
+#    for value1 in range(len(l)):
+#        for value2 in range(value1+1, len(l)):
+#            if l[value2]<l[value1]:
+#                l[value1],l[value2]=l[value2], l[value1]
+#
+#sentimentArray = list(map(float, sentimentArray))
+#
+#sentimentSort = sentimentArray
+#selectionSort(sentimentSort)
+#
+#w,h = 3,1076;
+#analysisArray = [[' ' for x in range(w)] for y in range(h)]
 
 
 
@@ -41,3 +41,4 @@ analysisArray = [[' ' for x in range(w)] for y in range(h)]
 #    postIndex = sentimentArray.index(search)
 #    analysisArray[senti] = metaArray[postIndex]
 #print(analysisArray)
+
