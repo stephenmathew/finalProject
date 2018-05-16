@@ -99,6 +99,7 @@ for i in range(0,1076):
 #    g.write('\n')
 #g.close()
 
+
 articlesPickle = open('articlesPickle','wb')
 pickle.dump(post,articlesPickle)
 
